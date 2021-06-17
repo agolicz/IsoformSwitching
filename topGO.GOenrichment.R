@@ -12,10 +12,8 @@ writeTopGO <- function(GOterm, top, txt, mg, uni){
     GOdata <-new ("topGOdata", ontology = GOterm, allGenes = geneList, nodeSize = top, annot=annFUN.gene2GO, gene2GO=annAT)
 
     resultFisher <- runTest(GOdata, algorithm = "weight", statistic ="fisher")
-    resultFisher
     allRes <-GenTable(GOdata, resFisher = resultFisher, topNodes = 100)
     names(allRes)[length(allRes)] <- "p.value"
-
     write.table(allRes, file=txt, sep="\t",quote=FALSE,row.names=FALSE)
     allRes$nc<-rep(txt,dim(allRes)[1])
     allGO = genesInTerm(GOdata)
@@ -27,7 +25,7 @@ writeTopGO <- function(GOterm, top, txt, mg, uni){
     write.table(df.res,file=paste(txt,".go.table",sep=""),sep="\t",row.names=F,quote=F)
 }
 
-#different node sizes give slightly different results, 5 or 10 are recommenided as most meaningful by the author
+#different node sizes give slightly different results, 5 or 10 are recommended as most meaningful by the author
 
 #three command line arguments
 #1. list with interesting genes
